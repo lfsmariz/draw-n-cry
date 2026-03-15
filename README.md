@@ -39,11 +39,25 @@ npm install
 cp .env.example .env
 ```
 
-Edite o `.env` e substitua o valor de `BOT_TOKEN`:
+Edite o `.env` com os valores corretos:
 
 ```env
 BOT_TOKEN=seu_token_aqui
+LOG_GROUP_ID=-100123456789
 ```
+
+- **`BOT_TOKEN`** — token fornecido pelo BotFather.
+- **`LOG_GROUP_ID`** — ID do grupo do Telegram onde o bot registra cada abertura de booster (usuário, set e hashes das cartas). Veja como obter abaixo.
+
+### Como configurar o grupo de log
+
+1. Crie um grupo no Telegram e adicione seu bot como membro
+2. Envie qualquer mensagem no grupo
+3. Acesse `https://api.telegram.org/bot<SEU_TOKEN>/getUpdates` no navegador
+4. Localize o campo `"chat": { "id": ... }` referente ao grupo — o valor será negativo (ex: `-1001234567890`)
+5. Cole esse valor em `LOG_GROUP_ID` no `.env`
+
+> O bot ignora comandos enviados dentro do próprio grupo de log para evitar loops.
 
 ### 5. Inicie o bot
 
